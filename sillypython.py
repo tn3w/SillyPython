@@ -1,4 +1,4 @@
-import random
+import random as rand
 import sys
 import os
 import json
@@ -17,7 +17,7 @@ def sillyfy(python_code: str):
     return new_python_code, new_character_meanings
 
 def random():
-    return ''.join(random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz") for _ in range(random.choice([3, 4, 5, 6, 7, 8, 9, 10, 11])))
+    return ''.join(random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz") for _ in range(rand.choice([3, 4, 5, 6, 7, 8, 9, 10, 11])))
 
 def create_template(silly_code: str, replaces: str):
     r1, r2, r3, r4, r5 = random(), random(), random(), random(), random()
