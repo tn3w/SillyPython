@@ -97,7 +97,7 @@ if __name__ == "__main__":
                             code = file.read()
                     except Exception as e:
                         print(f"[Error] File '{file_path}' could not be read, error information: {e}")
-                    for _ in iterations:
+                    for _ in range(iterations):
                         sily_code, replaces = sillyfy(code)
                         code = create_template(sily_code, replaces)
                     new_file_path = os.path.join(os.path.dirname(file_path), "sillypy.py")
