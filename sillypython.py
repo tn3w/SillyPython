@@ -58,7 +58,7 @@ if __name__ == "__main__":
     elif not "-f" in sys.argv and not "--file" in sys.argv:
         print("[Error] No file was specified with -f or --file. For more information use -h or --help.")
     else:
-        if "-f" in argument_list:
+        if "-f" in sys.argv:
             file_arg_index = sys.argv.index("-f") + 1
         else:
             file_arg_index = sys.argv.index("--file") + 1
