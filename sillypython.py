@@ -7,9 +7,9 @@ def sillyfy(python_code: str):
     unique_characters = list(set(python_code))
     new_character_meanings = dict()
     for character in unique_characters:
-        random_character = random.choice(unique_characters)
+        random_character = rand.choice(unique_characters)
         while random_character in new_character_meanings:
-            random_character = random.choice(unique_characters)
+            random_character = rand.choice(unique_characters)
         new_character_meanings[character] = random_character
     new_python_code = python_code
     for character, new_character in new_character_meanings.items():
