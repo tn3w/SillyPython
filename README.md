@@ -19,6 +19,6 @@ Before you start installing Silly Python, you need python installed (download at
 | Command                   | Information                                                                              | Example                            |
 | ------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------- |
 | -a, --about               | Displays an About menu with information about the software                               | `python sillypython.py -a`         |
-| -h, --help                | Displays a help menu similar to this this                                                | `python sillypython.py -h`         |
+| -h, --help                | Displays a help menu similar to this                                                     | `python sillypython.py -h`         |
 | -f, --file <file_path>    | Defines which file to use, file_path should be a string.                                 | `python sillypython.py -f main.py` |
 | -i, --iterations <number> | Specifies how many times Sillify should run. From 30 - 40 the program becomes very slow. | `python sillypython.py -i 25`      |
