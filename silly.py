@@ -4,6 +4,19 @@ import os
 import json
 from base64 import b64encode
 
+LOGO = """
+███████╗██╗██╗     ██╗  ██╗   ██╗    ██████╗ ██╗   ██╗
+██╔════╝██║██║     ██║  ╚██╗ ██╔╝    ██╔══██╗╚██╗ ██╔╝
+███████╗██║██║     ██║   ╚████╔╝     ██████╔╝ ╚████╔╝ 
+╚════██║██║██║     ██║    ╚██╔╝      ██╔═══╝   ╚██╔╝  
+███████║██║███████╗███████╗██║       ██║        ██║   
+╚══════╝╚═╝╚══════╝╚══════╝╚═╝       ╚═╝        ╚═╝   
+"""
+
+def clear_console():
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print(LOGO)
+
 def sillyfy(python_code: str):
     unique_characters = list(set(python_code))
     new_character_meanings = dict()
@@ -50,32 +63,31 @@ exec({r2}("""{silly_code}"""))'''
     return template
 
 if __name__ == "__main__":
-    os.system('cls' if os.name == 'nt' else 'clear')
-    print("""
-███████╗██╗██╗     ██╗  ██╗   ██╗    ██████╗ ██╗   ██╗
-██╔════╝██║██║     ██║  ╚██╗ ██╔╝    ██╔══██╗╚██╗ ██╔╝
-███████╗██║██║     ██║   ╚████╔╝     ██████╔╝ ╚████╔╝ 
-╚════██║██║██║     ██║    ╚██╔╝      ██╔═══╝   ╚██╔╝  
-███████║██║███████╗███████╗██║       ██║        ██║   
-╚══════╝╚═╝╚══════╝╚══════╝╚═╝       ╚═╝        ╚═╝   """)
+    clear_console()
+
     if len(sys.argv) < 2:
         print("[Error] No args given, use -h or --help to get a help menu with all commands displayed.")
+
     elif "-a" in sys.argv or "--about" in sys.argv:
         print("Programmed by TN3W\nMake your Python code look silly")
         print("- https://github.com/tn3w/sillypython -")
+
     elif "-h" in sys.argv or "--help" in sys.argv:
         print("Use the following command arguments:")
         print("-a, --about               > Displays an About menu with information about the software")
         print("-h, --help                > Displays this help menu")
         print("-f, --file <filename>     > Define the file which should look silly")
         print("-i, --iterations <number> > How many layers of sillyity there should be. (Default: 20)")
+
     elif not "-f" in sys.argv and not "--file" in sys.argv:
         print("[Error] No file was specified with -f or --file. For more information use -h or --help.")
+
     else:
         if "-f" in sys.argv:
             file_arg_index = sys.argv.index("-f") + 1
         else:
             file_arg_index = sys.argv.index("--file") + 1
+
         try:
             file_path = sys.argv[file_arg_index]
         except:
@@ -84,7 +96,7 @@ if __name__ == "__main__":
             if not os.path.isfile(file_path):
                 print(f"[Error] The given file '{file_path}' either does not exist or no file was specified after -f or --file.")
             else:
-                iterations = 20
+                iterations = 10
                 is_error = False
                 if "-i" in sys.argv or "--iterations" in sys.argv:
                     if "-i" in sys.argv:
@@ -106,34 +118,24 @@ if __name__ == "__main__":
                             is_error = True
                             print("[Error] The iteration number given after -i or --iterations is not a number.")
                 if not is_error:
+                    _, file_name = os.path.split(file_path)
+                    file_name = file_name.replace("." + file_name.split(".")[-1], "")
                     try:
-                        with open(file_path, "r") as file:
+                        with open(file_path, "r", encoding = "utf-8") as file:
                             code = file.read()
                     except Exception as e:
                         print(f"[Error] File '{file_path}' could not be read, error information: {e}")
                     else:
-                        for _ in range(iterations):
-                            os.system('cls' if os.name == 'nt' else 'clear')
-                            print("""
-███████╗██╗██╗     ██╗  ██╗   ██╗    ██████╗ ██╗   ██╗
-██╔════╝██║██║     ██║  ╚██╗ ██╔╝    ██╔══██╗╚██╗ ██╔╝
-███████╗██║██║     ██║   ╚████╔╝     ██████╔╝ ╚████╔╝ 
-╚════██║██║██║     ██║    ╚██╔╝      ██╔═══╝   ╚██╔╝  
-███████║██║███████╗███████╗██║       ██║        ██║   
-╚══════╝╚═╝╚══════╝╚══════╝╚═╝       ╚═╝        ╚═╝   """)
-                            print("Iteration Count:", _+1)
+                        for index in range(iterations):
+                            clear_console()
+                            print("Iteration Count:", index+1)
+
                             silly_code, replaces = sillyfy(code)
                             silly_code = b64encode(silly_code.encode()).decode()
                             code = create_template(silly_code, replaces)
-                        os.system('cls' if os.name == 'nt' else 'clear')
-                        print("""
-███████╗██╗██╗     ██╗  ██╗   ██╗    ██████╗ ██╗   ██╗
-██╔════╝██║██║     ██║  ╚██╗ ██╔╝    ██╔══██╗╚██╗ ██╔╝
-███████╗██║██║     ██║   ╚████╔╝     ██████╔╝ ╚████╔╝ 
-╚════██║██║██║     ██║    ╚██╔╝      ██╔═══╝   ╚██╔╝  
-███████║██║███████╗███████╗██║       ██║        ██║   
-╚══════╝╚═╝╚══════╝╚══════╝╚═╝       ╚═╝        ╚═╝   """)
-                        new_file_path = os.path.join(os.path.dirname(file_path), "sillypy.py")
+
+                        clear_console()
+                        new_file_path = os.path.join(os.path.dirname(file_path), file_name + "-s.py")
                         if os.path.isfile(new_file_path):
                             print(f"[Error] File '{new_file_path}' could not be written to because it already exists.")
                         else:
